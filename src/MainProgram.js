@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Animated } from 'react-native';
+import { StyleSheet, Text, View, ImageBackground } from 'react-native';
 import Expo from 'expo';
 import { API_KEY } from './utils/WeatherAPIKey.js';
 import Weather from './components/Weather.js';
@@ -50,6 +50,8 @@ export default class MainProgram extends Component {
         // console.log('temperature', temperature);
         // console.log('nameCity', nameCity);
         return (
+            // <ImageBackground source = {require('./images/bg.jpg')}
+            //                     style = {styles.background_image}>
             <View style = {styles.container}>
                 {isLoading ?
                     (<View style = {styles.fetching}>
@@ -61,11 +63,19 @@ export default class MainProgram extends Component {
                                 nameCity = {nameCity}/>)
                 }
             </View>
+            // </ImageBackground>
         );
     }
 }
 
 const styles = StyleSheet.create({
+    background_image: {
+        flex: 1,
+        alignSelf: 'stretch',
+        width: null,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
     container: {
         flex: 1,
         backgroundColor: '#fff',
