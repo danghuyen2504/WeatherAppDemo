@@ -10,8 +10,15 @@ export default class MainProgram extends Component {
         isLoading: true,
     
         temperature: 0,
-        weatherCondition: null,
-        nameCity: null,
+        temp_max: 0,
+        temp_min: 0,
+        visibility: 0,
+        weather: null,
+        description: null,
+        name: null,
+        humidity: 0,
+        wind_speed: 0,
+
         error: null
     };
 
@@ -19,6 +26,7 @@ export default class MainProgram extends Component {
         navigator.geolocation.getCurrentPosition(
             position => {
                 this.fetchWeather(position.coords.latitude, position.coords.longitude);
+                // this.fetchWeather(67.918881, -42.753010);
             },
             error => {
                 this.setState({
@@ -34,22 +42,26 @@ export default class MainProgram extends Component {
         )
         .then(res => res.json())
         .then(json => {
-            // console.log(json);
+            console.log(json);
             this.setState({
                 temperature: json.main.temp,
-                weatherCondition: json.weather[0].main,
-                nameCity: json.name,
+                temp_max: json.main.temp_max,
+                temp_min: json.main.temp_min,
+                visibility: json.visibility,
+                weather: json.weather[0].main,
+                description: json.weather[0].description,
+                name: json.name,
+                humidity: json.main.humidity,
+                wind_speed: json.wind.speed,
+
                 isLoading: false
             });
         });
     }
 
     render() {
-        const { isLoading, weatherCondition, temperature, nameCity } = this.state;
-        // console.log('isLoading', isLoading);
-        // console.log('weatherCondition', weatherCondition);
-        // console.log('temperature', temperature);
-        // console.log('nameCity', nameCity);
+        const { isLoading, temperature, temp_max, temp_min, visibility, weather, description, name, humidity, wind_speed } = this.state;
+        
         return (
             <View style = {styles.container}>
                 {isLoading ?
@@ -59,9 +71,15 @@ export default class MainProgram extends Component {
                         <Text style = {{fontSize: 25}}>Fetching data...</Text>
                     </View>)
                     :
-                    (<Weather   weather = {weatherCondition}
-                                temperature = {temperature}
-                                nameCity = {nameCity}/>)
+                    (<Weather   temperature = {temperature}
+                                temp_max = {temp_max}
+                                temp_min = {temp_min}
+                                visibility = {visibility}
+                                weather = {weather}
+                                description = {description}
+                                name = {name}
+                                humidity = {humidity}
+                                wind_speed = {wind_speed}/>)
                 }
             </View>
         );
