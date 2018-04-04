@@ -1,15 +1,13 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, ImageBackground } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import PropTypes from 'prop-types';
 import { weatherConditions } from '../utils/WeatherConditions.js';
 
 const Weather = ({weather, temperature, nameCity}) => {
     return (
-        <View style = {[
-                    styles.container,
-                    {backgroundColor: weatherConditions[weather].color}
-                ]}>
+        <ImageBackground    source = {require('../images/clouds.jpg')}
+                            style = {styles.container}>
             <View style = {styles.headerContainer}>
                 <MaterialCommunityIcons size = {72}
                                         style = {{marginTop: 25}}
@@ -22,7 +20,7 @@ const Weather = ({weather, temperature, nameCity}) => {
                 <Text style = {{fontSize: 60, color: '#fff'}}>{weatherConditions[weather].title}</Text>
                 <Text style = {{fontSize: 24, color: '#fff'}}>{weatherConditions[weather].subtitle}</Text>
             </View>
-        </View>
+        </ImageBackground>
     );
 };
 

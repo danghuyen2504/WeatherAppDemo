@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, ImageBackground } from 'react-native';
 import Expo from 'expo';
 import { API_KEY } from './utils/WeatherAPIKey.js';
 import Weather from './components/Weather.js';
+import * as Progress from 'react-native-progress';
 
 export default class MainProgram extends Component {
     state = {
@@ -50,12 +51,12 @@ export default class MainProgram extends Component {
         // console.log('temperature', temperature);
         // console.log('nameCity', nameCity);
         return (
-            // <ImageBackground source = {require('./images/bg.jpg')}
-            //                     style = {styles.background_image}>
             <View style = {styles.container}>
                 {isLoading ?
                     (<View style = {styles.fetching}>
-                        <Text style = {{fontSize: 25}}>Fetching the Weather</Text>
+                        <Progress.Circle size={50} thickness = {15}
+                                            indeterminate={true}/>
+                        <Text style = {{fontSize: 25}}>Fetching data...</Text>
                     </View>)
                     :
                     (<Weather   weather = {weatherCondition}
@@ -63,19 +64,11 @@ export default class MainProgram extends Component {
                                 nameCity = {nameCity}/>)
                 }
             </View>
-            // </ImageBackground>
         );
     }
 }
 
 const styles = StyleSheet.create({
-    background_image: {
-        flex: 1,
-        alignSelf: 'stretch',
-        width: null,
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
     container: {
         flex: 1,
         backgroundColor: '#fff',

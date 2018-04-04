@@ -1,11 +1,13 @@
 import React from 'react';
 import MainProgram from './src/MainProgram.js';
+import AddCity from './src/components/AddCity.js';
+import CityList from './src/components/CityList.js';
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
 
-    console.ignoredYellowBox = ['Warning'];
+    console.ignoredYellowBox = ['Warning', 'Setting'];
 
     this.state = {
       isReady: false,
