@@ -1,10 +1,11 @@
 import React from 'react';
-import { StyleSheet, View, Text, ImageBackground, Dimensions } from 'react-native';
+import { StyleSheet, View, Text, ImageBackground, Image, ScrollView } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import PropTypes from 'prop-types';
 import { weatherConditions } from '../utils/WeatherConditions.js';
 
 const Weather = ({temperature, temp_max, temp_min, visibility, weather, description, name, humidity, wind_speed}) => {
+    var speed = wind_speed * 1.61;
     return (
         <ImageBackground    source = {require('../images/bg.png')}
                             style = {styles.container}>
@@ -20,49 +21,82 @@ const Weather = ({temperature, temp_max, temp_min, visibility, weather, descript
                 <Text style = {[styles.text_shadow, {fontSize: 60}]}>{weatherConditions[weather].title}</Text>
                 <Text style = {[styles.text_shadow, {fontSize: 24}]}>{weatherConditions[weather].subtitle}</Text>
             </View> */}
+            <ScrollView>
+                <View style = {{alignItems: 'center', marginTop: 50}}>
+                    <Text style = {[styles.text_shadow, {fontSize: 50}]}>{name}</Text>
+                </View>
+                
+                <View style = {{flexDirection: 'row', margin: 20}}>
+                    <View style = {{flex: 1, flexDirection: 'column', alignItems: 'center'}}>
+                        <Text style = {[styles.text_shadow, {fontSize: 60}]}>{temperature}˚C</Text>
+                        <View style = {{flexDirection: 'row', marginTop: 15}}>
+                            <View style = {{flex: 1, alignItems: 'center'}}>
+                                <Text style = {[styles.text_shadow, {fontSize: 25}]}>Min: {temp_min}˚C</Text>
+                            </View>
+                            <View style = {{flex: 1, alignItems: 'center'}}>
+                                <Text style = {[styles.text_shadow, {fontSize: 25}]}>Max: {temp_max}˚C</Text>
+                            </View>
+                        </View>
+                    </View>
 
-            <View style = {{alignItems: 'center', marginTop: 30}}>
-                <Text style = {[styles.text_shadow, {fontSize: 50}]}>City</Text>
-            </View>
-            
-            <View style = {{flexDirection: 'row', margin: 10}}>
-                <View style = {{flex: 1, flexDirection: 'column', alignItems: 'center'}}>
-                    <Text style = {{fontSize: 55}}>Temp</Text>
-                    <Text style = {{fontSize: 20}}>Temp Min/Max</Text>
+                    <View style = {{flex: 1, flexDirection: 'column', alignItems: 'center'}}>
+                        <MaterialCommunityIcons size = {60}
+                                                style = {[styles.text_shadow, {marginTop: 10}]}
+                                                name = {weatherConditions[weather].icon}
+                                                color = {'#fff'}/>
+                        <Text style = {[styles.text_shadow, {fontSize: 40, marginTop: 15}]}>{weatherConditions[weather].title}</Text>
+                        <Text style = {[styles.text_shadow, {fontSize: 20}]}>{description}</Text>
+                    </View>
                 </View>
-                <View style = {{flex: 1, flexDirection: 'column', alignItems: 'center'}}>
-                <Text style = {{fontSize: 40}}>Icon</Text>
-                </View>
-            </View>
 
-            <View style = {{flexDirection: 'row', marginTop: 20}}>
-                <View style = {{flex: 1, flexDirection: 'column', alignItems: 'center'}}>
-                    <Text>Humidity</Text>
-                    <Text>Icon</Text>
-                    <Text>value</Text>
+                <View style = {{flexDirection: 'row', marginTop: 20}}>
+                    <View style = {{flex: 1, flexDirection: 'column', alignItems: 'center'}}>
+                        <Text style = {[styles.text_shadow, {fontSize: 22}]}>Humidity</Text>
+                        <MaterialCommunityIcons size = {30}
+                                                style = {[styles.text_shadow, {marginTop: 10}]}
+                                                name = 'water-percent'
+                                                color = {'#fff'}/>
+                        <Text style = {[styles.text_shadow, {marginTop: 10, fontSize: 20}]}>{humidity}%</Text>
+                    </View>
+                    <View style = {{flex: 1, flexDirection: 'column', alignItems: 'center'}}>
+                        <Text style = {[styles.text_shadow, {fontSize: 22}]}>Windy</Text>
+                        <MaterialCommunityIcons size = {30}
+                                                style = {[styles.text_shadow, {marginTop: 10}]}
+                                                name = 'weather-windy'
+                                                color = {'#fff'}/>
+                        <Text style = {[styles.text_shadow, {marginTop: 10, fontSize: 20}]}>{speed}km/h</Text>
+                    </View>
+                    <View style = {{flex: 1, flexDirection: 'column', alignItems: 'center'}}>
+                        <Text style = {[styles.text_shadow, {fontSize: 22}]}>Visibility</Text>
+                        <MaterialCommunityIcons size = {30}
+                                                style = {[styles.text_shadow, {marginTop: 10}]}
+                                                name = 'eye'
+                                                color = {'#fff'}/>
+                        <Text style = {[styles.text_shadow, {marginTop: 10, fontSize: 20}]}>{visibility}m</Text>
+                    </View>
                 </View>
-                <View style = {{flex: 1, flexDirection: 'column', alignItems: 'center'}}>
-                    <Text>Wind Speed</Text>
-                    <Text>Icon</Text>
-                    <Text>value</Text>
+
+                <View style = {styles.bodyContainer}>
+                    <Text style = {[styles.text_shadow, {fontSize: 30}]}>Should do</Text>
+                    <Text style = {[styles.text_shadow, {fontSize: 15}]}>{weatherConditions[weather].subtitle}</Text>
                 </View>
-                <View style = {{flex: 1, flexDirection: 'column', alignItems: 'center'}}>
-                    <Text>Visibility</Text>
-                    <Text>Icon</Text>
-                    <Text>value</Text>
-                </View>
-            </View>
+            </ScrollView>
         </ImageBackground>
     );
 };
 
-Weather.propTypes = {
-    temperature: PropTypes.number.isRequired,
-    weather: PropTypes.string,
-    name: PropTypes.string
-};
+// Weather.propTypes = {
+//     temperature: PropTypes.number.isRequired,
+//     temp_max: PropTypes.number.isRequired,
+//     temp_min: PropTypes.number.isRequired,
+//     visibility: PropTypes.number.isRequired,
+//     weather: PropTypes.string,
+//     description: PropTypes.string,
+//     name: PropTypes.string,
+//     humidity: PropTypes.number.isRequired,
+//     wind_speed: PropTypes.number.isRequired
+// };
 
-const win = Dimensions.get('window');
 const styles = StyleSheet.create({
     container: {
         flex: 1,
