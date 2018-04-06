@@ -4,7 +4,7 @@ export const weatherConditions = {
         title: 'Raining',
         subtitle: 'Maybe you need an umbrella',
         icon: 'weather-rainy',
-        background: require('../images/rain.jpg'),
+        background: require('../images/rain.png'),
     },
     Clear: {
         color: '#f7b733',
