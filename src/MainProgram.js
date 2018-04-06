@@ -42,7 +42,7 @@ export default class MainProgram extends Component {
         )
         .then(res => res.json())
         .then(json => {
-            // console.log(json);
+            console.log(json);
             this.setState({
                 temperature: json.main.temp,
                 temp_max: json.main.temp_max,
