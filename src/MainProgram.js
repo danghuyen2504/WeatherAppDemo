@@ -65,11 +65,20 @@ export default class MainProgram extends Component {
         return (
             <View style = {styles.container}>
                 {isLoading ?
-                    (<View style = {styles.fetching}>
-                        <Progress.Circle size={50} thickness = {15}
+                    (<ImageBackground source = {require('./images/bg.png')}
+                                        style = {{flex: 1}}>
+                        <View style = {styles.fetching}>
+                            <Progress.Circle size={50} thickness = {15}
                                             indeterminate={true}/>
-                        <Text style = {{fontSize: 25}}>Fetching data...</Text>
-                    </View>)
+                            <Text style = {{fontSize: 30,
+                                            color: '#fff',
+                                            textShadowColor: 'rgba(0, 0, 0, 0.75)',
+                                            textShadowOffset: {width: -1, height: 1},
+                                            textShadowRadius: 10}}>
+                                Fetching data...
+                            </Text>
+                        </View>
+                    </ImageBackground>)
                     :
                     (<Weather   temperature = {temperature}
                                 temp_max = {temp_max}
